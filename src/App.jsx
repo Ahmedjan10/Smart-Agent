@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import viteLogo from '/vite.svg'
 import Navigation from './Componenets/Navigation'
 import './App.css'
+import HeroSection from './Componenets/HeroSection';
 
 function App() {
     useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
   return (
     <>
     < Navigation />
+    <HeroSection/>
     </>
   )
 }
