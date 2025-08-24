@@ -3,6 +3,7 @@ import viteLogo from '/vite.svg'
 import Navigation from './Componenets/Navigation'
 import './App.css'
 import HeroSection from './Componenets/HeroSection';
+import ServicesSection from './Componenets/ServiceSection';
 
 function App() {
     useEffect(() => {
@@ -30,10 +31,11 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-slate-900 text-white antialiased">
     < Navigation />
     <HeroSection/>
-    </>
+    <ServicesSection/>
+    </div>
   )
 }
 
