@@ -4,6 +4,7 @@ import './App.css'
 import HeroSection from './Componenets/HeroSection';
 import ServicesSection from './Componenets/ServiceSection';
 import DashboardSection from './Componenets/DashboardSection';
+import Footer from './Componenets/Footer';
 
 function App() {
     useEffect(() => {
@@ -38,6 +39,7 @@ function App() {
         <ServicesSection />
         <DashboardSection />
       </main>
+      <Footer/>
 
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {/* Ambient Glow */}
