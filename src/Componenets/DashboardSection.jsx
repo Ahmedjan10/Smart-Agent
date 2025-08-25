@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   LineChart,
   Line,
-  BarChart,
-  Bar,
+  AreaChart,
+  Area,
   PieChart,
   Pie,
   Cell,
@@ -12,111 +12,32 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-  AreaChart,
-  Area
+  ResponsiveContainer
 } from 'recharts';
 import {
   Plus,
-  Edit,
-  Trash2,
-  BarChart3,
+  Bell,
   Users,
   Phone,
   MessageSquare,
   Activity,
+  BarChart3,
   Settings,
-  Bell,
-  TrendingUp,
-  Zap
+  HelpCircle,
+  ChevronUp
 } from 'lucide-react';
 
-const Card = ({ children, className = "" }) => (
-  <div className={`bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl ${className}`}>
-    {children}
-  </div>
-);
-
-const CardHeader = ({ children }) => (
-  <div className="p-6 pb-3">
-    {children}
-  </div>
-);
-
-const CardTitle = ({ children, className = "" }) => (
-  <h3 className={`text-lg font-semibold text-white ${className}`}>
-    {children}
-  </h3>
-);
-
-const CardContent = ({ children }) => (
-  <div className="p-6 pt-0">
-    {children}
-  </div>
-);
-
-const Button = ({ children, variant = "primary", size = "md", className = "", onClick }) => {
-  const baseClasses = "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200";
-  const variants = {
-    primary: "bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:from-cyan-600 hover:to-purple-700",
-    secondary: "bg-slate-700 text-white hover:bg-slate-600",
-    outline: "border border-slate-600 text-white hover:bg-slate-700"
-  };
-  const sizes = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2",
-    lg: "px-6 py-3 text-lg"
-  };
-  
-  return (
-    <button 
-      className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  );
-};
-
-const Switch = ({ checked, onCheckedChange }) => (
-  <button
-    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-      checked ? 'bg-cyan-500' : 'bg-slate-600'
-    }`}
-    onClick={() => onCheckedChange(!checked)}
-  >
-    <span
-      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-        checked ? 'translate-x-6' : 'translate-x-1'
-      }`}
-    />
-  </button>
-);
-
-const Badge = ({ children, variant = "default" }) => {
-  const variants = {
-    default: "bg-slate-700 text-white",
-    success: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
-    warning: "bg-amber-500/20 text-amber-400 border border-amber-500/30",
-    error: "bg-red-500/20 text-red-400 border border-red-500/30"
-  };
-  
-  return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]}`}>
-      {children}
-    </span>
-  );
-};
-
 const DashboardSection = () => {
-  // Sample data for charts
+  const [activeNav, setActiveNav] = useState('Dashboard');
+
+  // Sample data
   const usageData = [
-    { name: 'Jan', chatbot: 4000, voicebot: 2400, multiagent: 1400 },
-    { name: 'Feb', chatbot: 3000, voicebot: 1398, multiagent: 2210 },
-    { name: 'Mar', chatbot: 2000, voicebot: 9800, multiagent: 2290 },
-    { name: 'Apr', chatbot: 2780, voicebot: 3908, multiagent: 2000 },
-    { name: 'May', chatbot: 1890, voicebot: 4800, multiagent: 2181 },
-    { name: 'Jun', chatbot: 2390, voicebot: 3800, multiagent: 2500 },
+    { name: 'Jan', chatbot: 8000, voicebot: 6000, multiagent: 2000 },
+    { name: 'Feb', chatbot: 6000, voicebot: 4000, multiagent: 4000 },
+    { name: 'Mar', chatbot: 4000, voicebot: 12000, multiagent: 6000 },
+    { name: 'Apr', chatbot: 8000, voicebot: 8000, multiagent: 4000 },
+    { name: 'May', chatbot: 10000, voicebot: 6000, multiagent: 8000 },
+    { name: 'Jun', chatbot: 8000, voicebot: 8000, multiagent: 6000 },
   ];
 
   const pieData = [
@@ -126,89 +47,176 @@ const DashboardSection = () => {
   ];
 
   const stats = [
-    { title: 'Active Agents', value: '24', change: '+12%', icon: Users, color: 'text-cyan-400', trend: 'up' },
-    { title: 'User Interactions', value: '15.2k', change: '+8%', icon: MessageSquare, color: 'text-purple-400', trend: 'up' },
-    { title: 'Calls Made', value: '3.8k', change: '+15%', icon: Phone, color: 'text-emerald-400', trend: 'up' },
-    { title: 'Success Rate', value: '96.4%', change: '+2%', icon: Activity, color: 'text-pink-400', trend: 'up' }
+    { title: 'Active Agents', value: '24', change: '+12%', icon: Users, color: 'text-cyan-400' },
+    { title: 'User Interactions', value: '15.2k', change: '+8%', icon: MessageSquare, color: 'text-purple-400' },
+    { title: 'Calls Made', value: '3.8k', change: '+15%', icon: Phone, color: 'text-emerald-400' },
+    { title: 'Success Rate', value: '96.4%', change: '+2%', icon: Activity, color: 'text-pink-400' }
   ];
 
-  const agents = [
-    { name: 'Customer Support Bot', type: 'ChatBot', status: 'Active', performance: 98, requests: '1.2k' },
-    { name: 'Sales Assistant', type: 'VoiceBot', status: 'Active', performance: 94, requests: '856' },
-    { name: 'Technical Support', type: 'Multi-Agent', status: 'Inactive', performance: 89, requests: '423' },
-    { name: 'Lead Qualifier', type: 'ChatBot', status: 'Active', performance: 97, requests: '2.1k' }
+  const navItems = [
+    { name: 'Dashboard', icon: BarChart3, active: true },
+    { name: 'Agents', icon: Users, active: false },
+    { name: 'Analytics', icon: Activity, active: false },
+    { name: 'Settings', icon: Settings, active: false },
+    { name: 'Support', icon: HelpCircle, active: false },
   ];
 
   return (
-    <section id="dashboard" className="py-20 relative overflow-hidden min-h-screen bg-gradient-to-t from-slate-900 to-slate-800">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(168,85,247,0.1),transparent_50%)]"></div>
-      </div>
+    <div className="min-h-screen bg-slate-900">
+      {/* Hero Header Section */}
+      <section className="py-20 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.1),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(168,85,247,0.1),transparent_50%)]"></div>
+        </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Admin Dashboard
-          </h2>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            Monitor, manage, and optimize your AI agents with real-time analytics and intuitive controls
-          </p>
-        </motion.div>
-
-        {/* Stats Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {stats.map((stat, index) => (
-            <Card key={index} className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-white/60 mb-1">{stat.title}</p>
-                  <p className="text-2xl font-bold text-white">{stat.value}</p>
-                  <p className={`text-sm ${stat.color} flex items-center gap-1`}>
-                    <TrendingUp className="w-4 h-4" />
-                    {stat.change}
-                  </p>
-                </div>
-                <div className={`p-3 rounded-lg bg-slate-700/50 ${stat.color}`}>
-                  <stat.icon className="w-6 h-6" />
-                </div>
-              </div>
-            </Card>
-          ))}
-        </motion.div>
-
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Usage Chart */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Card>
-              <CardHeader>
-                <CardTitle>Usage Analytics</CardTitle>
-              </CardHeader>
-              <CardContent>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Admin Dashboard
+            </h2>
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+              Monitor, manage, and optimize your AI agents with real-time analytics and intuitive controls
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Windows Activation Notice - Top Right */}
+        <div className="absolute top-6 right-6">
+          <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg px-4 py-2 text-right">
+            <p className="text-slate-300 text-sm font-medium">Activate Windows</p>
+            <p className="text-slate-400 text-xs">Go to Settings to activate Windows.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Dashboard Interface */}
+      <div className="flex">
+        {/* Sidebar */}
+        <div className="w-72 bg-slate-800/50 backdrop-blur-sm border-r border-slate-700/50">
+          <div className="p-6">
+            <div className="flex items-center gap-2 mb-8">
+              <Settings className="w-6 h-6 text-cyan-400" />
+              <h1 className="text-white font-semibold text-lg">Control Panel</h1>
+            </div>
+
+            <nav className="space-y-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => setActiveNav(item.name)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+                    activeNav === item.name
+                      ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
+                  }`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  <span className="font-medium">{item.name}</span>
+                  {activeNav === item.name && (
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full ml-auto"></div>
+                  )}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          {/* Windows Activation Notice in Sidebar */}
+          <div className="absolute bottom-6 left-6 right-6">
+            <div className="bg-slate-700/50 rounded-lg p-4 border border-slate-600/50">
+              <p className="text-slate-300 text-sm mb-2">Activate Windows</p>
+              <p className="text-slate-400 text-xs">Go to Settings to activate Windows.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 overflow-hidden">
+          {/* Header */}
+          <div className="bg-slate-800/30 backdrop-blur-sm border-b border-slate-700/50 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-1">Agent Management</h2>
+                <p className="text-slate-400">Monitor performance and control your AI workforce</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <button className="p-2 text-slate-400 hover:text-white">
+                  <Bell className="w-5 h-5" />
+                </button>
+                <span className="text-slate-400">Alerts</span>
+                <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                  <Plus className="w-4 h-4" />
+                  Add Agent
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Dashboard Content */}
+          <div className="p-6 space-y-6 overflow-y-auto h-full">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`p-2 rounded-lg bg-slate-700/50 ${stat.color}`}>
+                      <stat.icon className="w-6 h-6" />
+                    </div>
+                    <div className="bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded text-xs font-medium">
+                      {stat.change}
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-slate-400 text-sm">{stat.title}</div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Charts Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Usage Trends Chart */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 }}
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6"
+              >
+                <div className="flex items-center gap-2 mb-6">
+                  <BarChart3 className="w-5 h-5 text-cyan-400" />
+                  <h3 className="text-lg font-semibold text-white">Agent Usage Trends</h3>
+                </div>
                 <ResponsiveContainer width="100%" height={300}>
                   <AreaChart data={usageData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                    <XAxis dataKey="name" stroke="#9CA3AF" />
-                    <YAxis stroke="#9CA3AF" />
+                    <defs>
+                      <linearGradient id="colorChatbot" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#00d4ff" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#00d4ff" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorVoicebot" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#a855f7" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#a855f7" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorMultiagent" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
+                    <XAxis dataKey="name" stroke="#9CA3AF" fontSize={12} />
+                    <YAxis stroke="#9CA3AF" fontSize={12} />
                     <Tooltip 
                       contentStyle={{
                         backgroundColor: '#1F2937',
@@ -217,149 +225,102 @@ const DashboardSection = () => {
                         color: '#F9FAFB'
                       }}
                     />
-                    <Area type="monotone" dataKey="chatbot" stackId="1" stroke="#00d4ff" fill="#00d4ff" fillOpacity={0.6} />
-                    <Area type="monotone" dataKey="voicebot" stackId="1" stroke="#a855f7" fill="#a855f7" fillOpacity={0.6} />
-                    <Area type="monotone" dataKey="multiagent" stackId="1" stroke="#06b6d4" fill="#06b6d4" fillOpacity={0.6} />
+                    <Area
+                      type="monotone"
+                      dataKey="chatbot"
+                      stroke="#00d4ff"
+                      fillOpacity={1}
+                      fill="url(#colorChatbot)"
+                      strokeWidth={2}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="voicebot"
+                      stroke="#a855f7"
+                      fillOpacity={1}
+                      fill="url(#colorVoicebot)"
+                      strokeWidth={2}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="multiagent"
+                      stroke="#06b6d4"
+                      fillOpacity={1}
+                      fill="url(#colorMultiagent)"
+                      strokeWidth={2}
+                    />
                   </AreaChart>
                 </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </motion.div>
 
-          {/* Agent Distribution */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>Agent Distribution</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <PieChart>
-                    <Pie
-                      data={pieData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={100}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      {pieData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip 
-                      contentStyle={{
-                        backgroundColor: '#1F2937',
-                        border: '1px solid #374151',
-                        borderRadius: '8px',
-                        color: '#F9FAFB'
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="flex justify-center gap-4 mt-4">
+              {/* Service Distribution Chart */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6"
+              >
+                <div className="flex items-center gap-2 mb-6">
+                  <Activity className="w-5 h-5 text-purple-400" />
+                  <h3 className="text-lg font-semibold text-white">Service Distribution</h3>
+                </div>
+                <div className="flex items-center justify-center">
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={pieData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={80}
+                        outerRadius={120}
+                        paddingAngle={2}
+                        dataKey="value"
+                      >
+                        {pieData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: '#1F2937',
+                          border: '1px solid #374151',
+                          borderRadius: '8px',
+                          color: '#F9FAFB'
+                        }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                
+                {/* Legend */}
+                <div className="flex justify-center gap-6 mt-4">
                   {pieData.map((entry, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <div 
                         className="w-3 h-3 rounded-full" 
                         style={{ backgroundColor: entry.color }}
-                      ></div>
-                      <span className="text-sm text-white/80">{entry.name}</span>
+                      />
+                      <span className="text-sm text-slate-300">{entry.name}</span>
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Windows Activation Message */}
+            <div className="fixed bottom-4 right-4">
+              <div className="bg-slate-800/90 backdrop-blur-sm border border-slate-700/50 rounded-lg px-4 py-2 flex items-center gap-2 text-slate-300 text-sm">
+                <span>Activate Windows</span>
+                <span className="text-slate-500">Go to Settings to activate Windows.</span>
+                <button className="text-cyan-400 hover:text-cyan-300">
+                  <ChevronUp className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Agents Management */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle>AI Agents Management</CardTitle>
-                <Button className="flex items-center gap-2">
-                  <Plus className="w-4 h-4" />
-                  Add Agent
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {agents.map((agent, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-slate-700/30 rounded-lg">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h4 className="font-medium text-white">{agent.name}</h4>
-                        <Badge variant={agent.status === 'Active' ? 'success' : 'warning'}>
-                          {agent.status}
-                        </Badge>
-                        <span className="text-sm text-white/60">{agent.type}</span>
-                      </div>
-                      <div className="flex items-center gap-4 text-sm text-white/60">
-                        <span>Performance: {agent.performance}%</span>
-                        <span>Requests: {agent.requests}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Switch checked={agent.status === 'Active'} onCheckedChange={() => {}} />
-                      <Button variant="secondary" size="sm">
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button variant="secondary" size="sm">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Quick Actions */}
-        <motion.div
-          className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <Card className="p-6 text-center">
-            <BarChart3 className="w-8 h-8 mx-auto mb-3 text-cyan-400" />
-            <h3 className="font-semibold text-white mb-2">Analytics</h3>
-            <p className="text-sm text-white/60 mb-4">View detailed performance metrics</p>
-            <Button variant="outline" size="sm">View Reports</Button>
-          </Card>
-
-          <Card className="p-6 text-center">
-            <Settings className="w-8 h-8 mx-auto mb-3 text-purple-400" />
-            <h3 className="font-semibold text-white mb-2">Settings</h3>
-            <p className="text-sm text-white/60 mb-4">Configure agent parameters</p>
-            <Button variant="outline" size="sm">Open Settings</Button>
-          </Card>
-
-          <Card className="p-6 text-center">
-            <Bell className="w-8 h-8 mx-auto mb-3 text-pink-400" />
-            <h3 className="font-semibold text-white mb-2">Notifications</h3>
-            <p className="text-sm text-white/60 mb-4">Manage alerts and updates</p>
-            <Button variant="outline" size="sm">View Alerts</Button>
-          </Card>
-        </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 
