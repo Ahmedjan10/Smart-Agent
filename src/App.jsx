@@ -1,18 +1,23 @@
-import { useEffect } from 'react';
-import Navigation from './Componenets/Navigation'
-import './App.css'
+'use client';
+
+import { useEffect, useState } from 'react';
+import Navigation from './Componenets/Navigation';
 import HeroSection from './Componenets/HeroSection';
 import ServicesSection from './Componenets/ServiceSection';
 import DashboardSection from './Componenets/DashboardSection';
 import Footer from './Componenets/Footer';
+import AuthPage from './Componenets/Authpage';
 
-function App() {
-    useEffect(() => {
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('home'); // ✅ removed type
+
+  useEffect(() => {
     // Apply dark theme on mount
     document.documentElement.classList.add('dark');
     
     // Smooth scrolling for anchor links
-    const handleAnchorClick = (e) => {
+    const handleAnchorClick = (e) => {   // ✅ removed Event typing
       const target = e.target;
       if (target.href && target.href.includes('#')) {
         e.preventDefault();
@@ -31,17 +36,33 @@ function App() {
     };
   }, []);
 
+  const navigateToAuth = () => setCurrentPage('auth');
+  const navigateToHome = () => setCurrentPage('home');
+
+  // Render different pages based on current route
+  if (currentPage === 'auth') {
+    return <AuthPage onBack={navigateToHome} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-900 text-white antialiased">
-    < Navigation />
-<main className="relative">
-        <HeroSection />
+      {/* Navigation */}
+      <Navigation onNavigateToAuth={navigateToAuth} />
+      
+      {/* Main Content */}
+      <main className="relative">
+        <HeroSection onNavigateToAuth={navigateToAuth} />
         <ServicesSection />
-        <DashboardSection />
+        {/* <DashboardSection /> */}
+    
       </main>
-      <Footer/>
-
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      
+      
+      {/* Footer */}
+      <Footer />
+      
+      {/* Global Background Effects */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {/* Ambient Glow */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
@@ -50,7 +71,7 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent opacity-20 animate-pulse"></div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+

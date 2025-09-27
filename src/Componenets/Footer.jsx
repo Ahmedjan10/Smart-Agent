@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Github, Twitter, Linkedin, Mail, ArrowUp } from 'lucide-react';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -36,16 +36,47 @@ const Footer = () => {
   ];
 
   return (
-    <footer id="contact" className="relative pt-20 pb-8 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900 to-slate-800/50">
-        <div className="absolute inset-0 holographic opacity-10"></div>
+    <footer id="contact" className="relative pt-20 pb-8 overflow-hidden bg-black">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+          backgroundSize: '40px 50px'
+        }}></div>
+      </div>
+
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full opacity-20"
+            style={{
+              background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
+              left: `${10 + (i * 12)}%`,
+              top: `${20 + (i * 8)}%`
+            }}
+            animate={{
+              y: [-10, 10, -10],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{
+              duration: 4 + i,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
       </div>
 
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center neon-glow hover:scale-110 transition-transform"
+        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform"
+        style={{
+          background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
+          boxShadow: '0 4px 15px rgba(255, 140, 0, 0.3)'
+        }}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ y: -2 }}
@@ -66,10 +97,25 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center neon-glow">
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
+                  boxShadow: '0 4px 15px rgba(255, 140, 0, 0.3)'
+                }}
+              >
                 <div className="w-5 h-5 bg-white rounded-sm opacity-90"></div>
               </div>
-              <span className="text-2xl font-bold gradient-text">SmartAgent Hub</span>
+              <span className="text-2xl font-bold">
+                <span className="bg-gradient-to-r from-amber-300 via-yellow-400 to-orange-500"
+                  style={{
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
+                  AI Agent Hub
+                </span>
+              </span>
             </div>
             <p className="text-white/70 mb-6 leading-relaxed">
               Empowering businesses with next-generation AI agents. Transform your operations with our cutting-edge ChatBot, VoiceBot, and Multi-Agent systems.
@@ -83,7 +129,7 @@ const Footer = () => {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 glass-effect rounded-lg flex items-center justify-center text-white/60 hover:text-cyan-400 transition-colors hover:neon-glow"
+                    className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-white/60 hover:text-orange-400 transition-colors hover:border-orange-400/30 hover:bg-orange-400/5"
                     whileHover={{ y: -2, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -119,7 +165,7 @@ const Footer = () => {
                   >
                     <a 
                       href="#" 
-                      className="text-white/60 hover:text-cyan-400 transition-colors hover:translate-x-1 inline-block transform transition-transform duration-200"
+                      className="text-white/60 hover:text-orange-400 transition-colors hover:translate-x-1 inline-block transform transition-transform duration-200"
                     >
                       {link}
                     </a>
@@ -132,13 +178,29 @@ const Footer = () => {
 
         {/* Newsletter Section */}
         <motion.div
-          className="glass-effect rounded-2xl p-8 mb-12"
+          className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-12 relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <div className="max-w-2xl mx-auto text-center">
+          {/* Animated Background Gradient */}
+          <motion.div
+            className="absolute inset-0 opacity-10"
+            style={{
+              background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
+            }}
+            animate={{
+              opacity: [0.05, 0.15, 0.05],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <div className="max-w-2xl mx-auto text-center relative z-10">
             <h3 className="text-2xl font-bold text-white mb-4">Stay Updated</h3>
             <p className="text-white/70 mb-6">
               Get the latest news about AI technology and product updates delivered to your inbox.
@@ -147,9 +209,14 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20"
               />
-              <Button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 border-0 px-8">
+              <Button 
+                className="px-8 text-black font-medium border-0"
+                style={{
+                  background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
+                }}
+              >
                 Subscribe
               </Button>
             </div>
@@ -165,16 +232,16 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p className="text-white/60 mb-4 md:mb-0">
-            © 2024 SmartAgent Hub. All rights reserved.
+            © 2024 AI Agent Hub. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-6">
-            <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors">
+            <a href="#" className="text-white/60 hover:text-orange-400 transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors">
+            <a href="#" className="text-white/60 hover:text-orange-400 transition-colors">
               Terms of Service
             </a>
-            <a href="#" className="text-white/60 hover:text-cyan-400 transition-colors">
+            <a href="#" className="text-white/60 hover:text-orange-400 transition-colors">
               Cookie Policy
             </a>
           </div>

@@ -1,172 +1,129 @@
 'use client';
 
-import { motion } from 'framer-motion'; // ✅ FIXED import
-import { Button } from './ui/Button';
-import { Zap, ArrowRight, Play } from 'lucide-react';
-import { Suspense } from 'react';
-import Robot3D from './Robot3D';
+import { motion } from 'framer-motion'; 
+import { Button } from './ui/button';
+import { Play, ArrowRight, Bot } from 'lucide-react';
+import skylineImage from '/Buildings.png'; 
+
 
 const HeroSection = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
-        <div className="absolute inset-0 holographic opacity-30"></div>
+    <div className="relative min-h-screen bg-black overflow-hidden">
+      {/* City Skyline Background Image */}
+      <motion.div
+  className="absolute inset-0"
+  initial={{ opacity: 0, scale: 1.1 }}
+  animate={{
+    opacity: 0.5,
+    scale: window.innerWidth < 768 ? 0.9 : 0.75, // mobile vs desktop
+    y: window.innerWidth < 768 ? 60 : 110,
+  }}
+  transition={{ duration: 1.2, ease: "easeOut" }}
+>
+  <img
+    src={skylineImage}
+    alt="City Skyline"
+    className="w-full h-full object-cover"
+    style={{ filter: "brightness(0.57) contrast(2.7)" }}
+  />
+  <div className="absolute inset-0 bg-black/40" />
+</motion.div>
 
-        {/* Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}
-        />
-
-        {/* Floating Particles */}
-        {[...Array(30)].map((_, i) => (
+  
+      {/* Content Overlay */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          
+          {/* Top Badge */}
           <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -150, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-
-        {/* Beam effects */}
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={`beam-${i}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-            style={{
-              left: '10%',
-              right: '10%',
-              top: `${20 + i * 15}%`,
-            }}
-            animate={{
-              opacity: [0, 0.8, 0],
-              scaleX: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.5,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
-        {/* Left Content - Text */}
-        <motion.div
-          className="text-center lg:text-left order-1"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <motion.div
-            className="inline-flex items-center px-4 py-2 rounded-full glass-effect border border-cyan-400/30 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 1.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/15 border border-amber-400/30 rounded-full text-amber-300 mb-8 font-medium tracking-wide"
           >
-            <Zap className="w-4 h-4 text-cyan-400 mr-2" />
-            <span className="text-sm text-cyan-400">Powered by Advanced AI</span>
+            <Bot className="w-4 h-4" />
+            <span className="text-sm">Powered by Advanced AI</span>
           </motion.div>
 
-          <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.7 }}
-          >
-            <span className="gradient-text">Next-Gen AI</span>
-            <br />
-            <span className="text-white">Assistant Hub</span>
-          </motion.h1>
-
-          <motion.p
-            className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+          {/* Main Heading */}
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.9 }}
+            transition={{ duration: 0.8, delay: 1.7 }}
+            className="mb-6"
           >
-            Deploy powerful AI agents with our cutting-edge platform. ChatBots, VoiceBots, and Multi-Agent Systems that transform your business operations with unprecedented intelligence.
+            <h1 className="text-3xl  sm:text-3xl md:text-5xl lg:text-7xl font-extrabold mb-4 tracking-tight leading-tight">
+              <span className="bg-gradient-to-r from-amber-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent drop-shadow-lg">
+                Next-Gen AI
+              </span>
+              <br />
+              <span className="text-gray-100 drop-shadow-md">Assistant Hub</span>
+            </h1>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2.1 }}
+            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light drop-shadow-sm"
+          >
+            Deploy powerful AI agents with our enterprise platform. 
+            Advanced ChatBots, VoiceBots, and Multi-Agent Systems that 
+            transform your business operations with intelligence and efficiency.
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.1 }}
+            transition={{ duration: 0.6, delay: 2.5 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 neon-glow pulse-glow group px-8 py-4"
+            <Button 
+              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg group"
             >
-              <Zap className="w-5 h-5 mr-2" />
-              Get Started Free
+              <span>Get Started Free</span>
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 bg-transparent group px-8 py-4"
+            
+            <Button 
+              variant="outline" 
+              className="border-amber-400/50 text-amber-200 hover:bg-amber-500/10 hover:border-amber-300 px-8 py-4 text-lg font-semibold rounded-2xl group"
             >
-              <Play className="w-5 h-5 mr-2" />
-              Watch Demo
+              <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              <span>Watch Demo</span>
             </Button>
           </motion.div>
 
-          {/* Stats */}
+          {/* Statistics */}
           <motion.div
-            className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.3 }}
+            transition={{ duration: 0.8, delay: 2.9 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
           >
-            {[
-              { value: '50K+', label: 'Active Users' },
-              { value: '99.9%', label: 'Uptime' },
-              { value: '24/7', label: 'Support' }
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-2xl font-bold text-cyan-400 mb-1">{stat.value}</div>
-                <div className="text-sm text-white/60">{stat.label}</div>
-              </div>
-            ))}
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">50K+</div>
+              <div className="text-gray-400 text-sm font-medium tracking-wide uppercase">Active Users</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">99.9%</div>
+              <div className="text-gray-400 text-sm font-medium tracking-wide uppercase">Uptime</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">24/7</div>
+              <div className="text-gray-400 text-sm font-medium tracking-wide uppercase">Support</div>
+            </div>
           </motion.div>
-        </motion.div>
 
-        {/* Right Content - 3D Robot */}
-        <motion.div
-          className="flex justify-center lg:justify-end order-2"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-         <div className="w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]">
-    <Robot3D />
-  </div>
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
 export default HeroSection;
+
