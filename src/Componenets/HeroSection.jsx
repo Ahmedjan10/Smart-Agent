@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion'; 
-import { Button } from './ui/button';
+import { Button } from './ui/Button';
 import { Play, ArrowRight, Bot } from 'lucide-react';
 import skylineImage from '/Buildings.png'; 
 

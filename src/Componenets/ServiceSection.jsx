@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from './ui/button';
+import { Button } from './ui/Button';
 import { MessageCircle, Mic, Users, ArrowRight, Sparkles, Send, Play, Network } from 'lucide-react';
 
 const ServicesSection = () => {

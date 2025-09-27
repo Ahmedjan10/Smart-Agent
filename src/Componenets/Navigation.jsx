@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from './ui/Button';
 
 const Navigation = ({ onNavigateToAuth }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
