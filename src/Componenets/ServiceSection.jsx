@@ -117,7 +117,7 @@ const ServicesSection = () => {
   };
 
   return (
-    <section id="services" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden min-h-screen bg-black">
+    <section id="services" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden min-h-screen bg-white">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{

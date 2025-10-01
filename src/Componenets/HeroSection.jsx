@@ -1,59 +1,67 @@
 'use client';
 
-import { motion } from 'framer-motion'; 
-import { Button } from './ui/Button';
-import { Play, ArrowRight, Bot } from 'lucide-react';
-import skylineImage from '/Buildings.png'; 
+import { motion } from 'framer-motion';
+import { Play, ArrowRight } from 'lucide-react';
 
+// Button component
+const Button = ({ children, variant = 'default', className = '', ...props }) => {
+  const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-200";
+  const variants = {
+    default: "bg-blue-500 hover:bg-blue-600 text-white",
+    outline: "border-2 bg-transparent"
+  };
+
+  return (
+    <button
+      className={`${baseStyles} ${variants[variant]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
 
 const HeroSection = () => {
+  const skylineImage = '/c71702f017efc971dae7cb6e4cb09c5c.jpg';
+
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* City Skyline Background Image */}
+      {/* City Skyline Background Image - Right Side */}
       <motion.div
-  className="absolute inset-0"
-  initial={{ opacity: 0, scale: 1.1 }}
-  animate={{
-    opacity: 0.5,
-    scale: window.innerWidth < 768 ? 0.9 : 0.75, // mobile vs desktop
-    y: window.innerWidth < 768 ? 60 : 110,
-  }}
-  transition={{ duration: 1.2, ease: "easeOut" }}
->
-  <img
-    src={skylineImage}
-    alt="City Skyline"
-    className="w-full h-full object-cover"
-    style={{ filter: "brightness(0.57) contrast(2.7)" }}
-  />
-  <div className="absolute inset-0 bg-black/40" />
-</motion.div>
+        className="absolute right-0 top-10 w-auto h-auto opacity-80 lg:opacity-100 lg:right-18  lg:top-10 lg:w-1/2 lg:h-auto"
+      >
+        <img
+          src={skylineImage}
+          alt="City Skyline"
+          className=" object-cover scale-120 sm:scale-120 md:scale-115 lg:scale-120 xl:scale-120"
+          style={{ filter: "brightness(1.1) contrast(1.7)" }}
+        />
+      </motion.div>
 
-  
-      {/* Content Overlay */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          
+      {/* Content Overlay - Left Aligned */}
+      <div className=" relative z-10 min-h-screen flex items-center 
+  px-4 sm:px-6 lg:px-30 
+  py-12 lg:py-50 
+  translate-y-40 sm:translate-y-5">
+        <div className="max-w-3xl text-left w-full">
+
           {/* Top Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 1.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/15 border border-amber-400/30 rounded-full text-amber-300 mb-8 font-medium tracking-wide"
           >
-            <Bot className="w-4 h-4" />
-            <span className="text-sm">Powered by Advanced AI</span>
           </motion.div>
 
           {/* Main Heading */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.7 }}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
           >
-            <h1 className="text-3xl  sm:text-3xl md:text-5xl lg:text-7xl font-extrabold mb-4 tracking-tight leading-tight">
-              <span className="bg-gradient-to-r from-amber-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent drop-shadow-lg">
+            <h1 className="text-6xl sm:text-6xl md:text-10xl lg:text-7xl font-extrabold mb-2 sm:mb-4 tracking-tight leading-tight">
+              <span className="bg-blue-100 bg-clip-text text-transparent drop-shadow-lg">
                 Next-Gen AI
               </span>
               <br />
@@ -63,33 +71,33 @@ const HeroSection = () => {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 2.1 }}
-            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light drop-shadow-sm"
+            className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mb-8 sm:mb-10 leading-relaxed font-light drop-shadow-sm"
           >
-            Deploy powerful AI agents with our enterprise platform. 
-            Advanced ChatBots, VoiceBots, and Multi-Agent Systems that 
+            Deploy powerful AI agents with our enterprise platform.
+            Advanced ChatBots, VoiceBots, and Multi-Agent Systems that
             transform your business operations with intelligence and efficiency.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 2.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16"
           >
-            <Button 
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-lg group"
+            <Button
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-2xl shadow-lg group w-full sm:w-auto"
             >
               <span>Get Started Free</span>
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            
-            <Button 
-              variant="outline" 
-              className="border-amber-400/50 text-amber-200 hover:bg-amber-500/10 hover:border-amber-300 px-8 py-4 text-lg font-semibold rounded-2xl group"
+
+            <Button
+              variant="outline"
+              className="border-blue-400/50 text-white hover:bg-blue-500/10 hover:border-blue-300 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-2xl group w-full sm:w-auto"
             >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               <span>Watch Demo</span>
@@ -98,25 +106,12 @@ const HeroSection = () => {
 
           {/* Statistics */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 2.9 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+            className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl"
           >
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">50K+</div>
-              <div className="text-gray-400 text-sm font-medium tracking-wide uppercase">Active Users</div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">99.9%</div>
-              <div className="text-gray-400 text-sm font-medium tracking-wide uppercase">Uptime</div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">24/7</div>
-              <div className="text-gray-400 text-sm font-medium tracking-wide uppercase">Support</div>
-            </div>
+
           </motion.div>
 
         </div>
@@ -126,4 +121,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

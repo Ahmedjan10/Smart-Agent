@@ -30,7 +30,7 @@ const Navigation = ({ onNavigateToAuth }) => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <div className="w-8 h-8 bg-gradient-to-br to-orange-500 to-orange-400 rounded-lg flex items-center justify-center neon-glow">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center neon-glow">
               <div className="w-4 h-4 bg-white rounded-sm opacity-90"></div>
             </div>
             <span className="text-xl font-bold gradient-text">SmartAgent Hub</span>
@@ -64,14 +64,14 @@ const Navigation = ({ onNavigateToAuth }) => {
                 variant="outline"
                 size="sm"
                 onClick={onNavigateToAuth}
-                className="border-orange-500/30 text-orange-400 hover:border-orange-300 hover:bg-orange-500/10 transition-all duration-300"
+                className="border-blue-400/100 text-blue-400 hover:border-blue-300 hover:bg-blue-500/10 transition-all duration-300"
               >
                 Sign In
               </Button>
               <Button
                 size="sm"
                 onClick={onNavigateToAuth}
-                className="bg-gradient-to-r from-orange-800 to-yellow-700 hover:from-orange-500 hover:to-yellow-700 text-white neon-glow transition-all duration-300 transform hover:scale-105"
+                className="bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-500 hover:to-blue-700 text-white neon-glow transition-all duration-300 transform hover:scale-105"
               >
                 Get Started
               </Button>
