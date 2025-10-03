@@ -12,7 +12,7 @@ const LogoIcon = ({ icon }) => {
     );
 };
 
-const LogoShowCase = () => (
+const LogoShowcase = () => (
     <div className="relative bg-white py-10 w-full rounded-t-[60px] md:rounded-t-[80px]">
         <div className="gradient-edge" />
         <div className="gradient-edge" />
@@ -31,4 +31,4 @@ const LogoShowCase = () => (
     </div>
 );
 
-export default LogoShowCase;
+export default LogoShowcase;
