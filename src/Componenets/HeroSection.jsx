@@ -2,24 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Play, ArrowRight } from 'lucide-react';
-
-// Button component
-const Button = ({ children, variant = 'default', className = '', ...props }) => {
-  const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-200";
-  const variants = {
-    default: "bg-blue-500 hover:bg-blue-600 text-white",
-    outline: "border-2 bg-transparent"
-  };
-
-  return (
-    <button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+import { Button } from './ui/Button';
 
 const HeroSection = () => {
   const skylineImage = '/c71702f017efc971dae7cb6e4cb09c5c.jpg';
@@ -60,7 +43,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 1.7 }}
             className="mb-4 sm:mb-6"
           >
-            <h1 className="text-6xl sm:text-6xl md:text-10xl lg:text-7xl font-extrabold mb-2 sm:mb-4 tracking-tight leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-10xl lg:text-7xl font-extrabold mb-2 sm:mb-4 tracking-tight leading-tight">
               <span className="bg-blue-100 bg-clip-text text-transparent drop-shadow-lg">
                 Next-Gen AI
               </span>
@@ -74,7 +57,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 2.1 }}
-            className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mb-8 sm:mb-10 leading-relaxed font-light drop-shadow-sm"
+            className="text-base sm:text-lg md:text-xl text-white max-w-2xl mb-8 sm:mb-10 leading-relaxed font-light drop-shadow-sm"
           >
             Deploy powerful AI agents with our enterprise platform.
             Advanced ChatBots, VoiceBots, and Multi-Agent Systems that

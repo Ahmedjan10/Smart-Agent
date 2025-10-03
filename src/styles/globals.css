@@ -1,5 +1,13 @@
 @custom-variant dark (&:is(.dark *));
 
+body {
+  width: 100dvw;
+  overflow-x: hidden;
+  background-color: rgb(255, 255, 255);
+  color: white;
+  scroll-behavior: smooth;
+  font-family: "Mona Sans", sans-serif;
+}
 :root {
   --font-size: 16px;
   --background: #ffffff;
@@ -39,6 +47,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
+
 }
 
 .dark {
@@ -204,5 +214,94 @@ html {
   border-image-slice: 1;
   animation: borderYellowMove 4s linear infinite;
 }
+/* showcaseLogos */
+
+/* marquee */
+ .gradient-edge {
+    width: 9rem; /* w-36 */
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 20;
+  }
+.marquee {
+  width: 100dvw;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Fade effect left + right */
+.marquee::before,
+.marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Small screens (mobile) */
+.marquee::before,
+.marquee::after {
+  width: 40px; /* smaller fade */
+}
+
+/* Medium screens (tablet) */
+@media (min-width: 768px) {
+  .marquee::before,
+  .marquee::after {
+    width: 80px;
+  }
+}
+
+/* Large screens (desktop) */
+@media (min-width: 1024px) {
+  .marquee::before,
+  .marquee::after {
+    width: 150px;
+  }
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, white 70%, transparent 100%);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, white 70%, transparent 100%);
+}
 
 
+.marquee-box {
+  display: flex;
+  align-items: center;
+  width: 200%;
+  height: 100%;
+  position: absolute;
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-item {
+  float: left;
+  width: 8rem; /* w-32 */
+}
+
+@media (min-width: 768px) {
+  .marquee-item {
+    width: 20rem; /* md:w-40 */
+  }
+}
+
+@keyframes marquee {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+
+/* marquee end */
