@@ -72,10 +72,9 @@ const Footer = () => {
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform"
+        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform bg-blue-500"
         style={{
-          background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
-          boxShadow: '0 4px 15px rgba(255, 140, 0, 0.3)'
+          
         }}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -98,16 +97,16 @@ const Footer = () => {
           >
             <div className="flex items-center space-x-2 mb-6">
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center"
+                className="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-700"
                 style={{
-                  background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
-                  boxShadow: '0 4px 15px rgba(255, 140, 0, 0.3)'
+                  
+              
                 }}
               >
                 <div className="w-5 h-5 bg-white rounded-sm opacity-90"></div>
               </div>
               <span className="text-2xl font-bold">
-                <span className="bg-gradient-to-r from-amber-300 via-yellow-400 to-orange-500"
+                <span className="bg-blue-100 bg-clip-text text-transparent"
                   style={{
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -129,7 +128,7 @@ const Footer = () => {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-white/60 hover:text-orange-400 transition-colors hover:border-orange-400/30 hover:bg-orange-400/5"
+                    className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-white/60 hover:text-blue-400 transition-colors hover:border-blue-400/30 hover:bg-orange-400/5"
                     whileHover={{ y: -2, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -165,7 +164,7 @@ const Footer = () => {
                   >
                     <a 
                       href="#" 
-                      className="text-white/60 hover:text-orange-400 transition-colors hover:translate-x-1 inline-block transform transition-transform duration-200"
+                      className="text-white/60 hover:text-blue-400 transition-colors hover:translate-x-1 inline-block transform transition-transform duration-200"
                     >
                       {link}
                     </a>
@@ -209,13 +208,11 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20"
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
               />
               <Button 
-                className="px-8 text-black font-medium border-0"
-                style={{
-                  background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
-                }}
+                className="px-8 text-white font-medium border-0 bg-blue-500"
+                
               >
                 Subscribe
               </Button>
@@ -235,13 +232,13 @@ const Footer = () => {
             © 2024 AI Agent Hub. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-6">
-            <a href="#" className="text-white/60 hover:text-orange-400 transition-colors">
+            <a href="#" className="text-white/60 hover:text-blue-400 transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-white/60 hover:text-orange-400 transition-colors">
+            <a href="#" className="text-white/60 hover:text-blue-400 transition-colors">
               Terms of Service
             </a>
-            <a href="#" className="text-white/60 hover:text-orange-400 transition-colors">
+            <a href="#" className="text-white/60 hover:text-blue-400 transition-colors">
               Cookie Policy
             </a>
           </div>
