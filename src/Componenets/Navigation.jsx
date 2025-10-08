@@ -23,7 +23,7 @@ const Navigation = ({ onNavigateToAuth }) => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="backdrop-blur-md bg-black/100 rounded-full border border-white/15 px-6 shadow-2xl">
+        <div className="backdrop-blur-md bg-gray-300 rounded-full border border-black/10 px-6 shadow-2xl">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <motion.div 
@@ -34,7 +34,7 @@ const Navigation = ({ onNavigateToAuth }) => {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center neon-glow">
                 <div className="w-4 h-4 bg-white rounded-sm opacity-90"></div>
               </div>
-              <span className="text-xl font-bold gradient-text">SmartAgent Hub</span>
+              <span className="text-xl font-bold gradient-text text-black">SmartAgent Hub</span>
             </motion.div>
 
             {/* Desktop Menu */}
@@ -43,7 +43,7 @@ const Navigation = ({ onNavigateToAuth }) => {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  className="relative text-white/80 hover:text-white transition-colors duration-300 group"
+                  className="relative text-black hover:text-white transition-colors duration-300 group"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 + 0.5 }}
@@ -83,7 +83,7 @@ const Navigation = ({ onNavigateToAuth }) => {
             <div className="md:hidden">
               <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white/80 hover:text-white transition-colors duration-300 z-[60]"
+                className="text-black/80 hover:text-black transition-colors duration-300 z-[60]"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
