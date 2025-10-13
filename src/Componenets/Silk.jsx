@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { forwardRef, useRef, useMemo, useLayoutEffect } from 'react';
+import { forwardRef, useRef, useMemo, useLayoutEffect, useEffect, useState } from 'react';
 import { Color } from 'three';
 
 const hexToNormalizedRGB = hex => {
@@ -93,6 +93,22 @@ SilkPlane.displayName = 'SilkPlane';
 
 const Silk = ({ speed = 5, scale = 1, color = '#7B7481', noiseIntensity = 1.5, rotation = 0 }) => {
   const meshRef = useRef();
+  const [dpr, setDpr] = useState([1, 2]);
+
+  useEffect(() => {
+    const updateDpr = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setDpr([1, 1.5]); // Lower DPR for mobile
+      } else {
+        setDpr([1, 2]); // Full DPR for desktop
+      }
+    };
+
+    updateDpr();
+    window.addEventListener('resize', updateDpr);
+    return () => window.removeEventListener('resize', updateDpr);
+  }, []);
 
   const uniforms = useMemo(
     () => ({
@@ -107,7 +123,7 @@ const Silk = ({ speed = 5, scale = 1, color = '#7B7481', noiseIntensity = 1.5, r
   );
 
   return (
-    <Canvas dpr={[1, 2]} frameloop="always">
+    <Canvas dpr={dpr} frameloop="always" className="w-full h-full">
       <SilkPlane ref={meshRef} uniforms={uniforms} />
     </Canvas>
   );

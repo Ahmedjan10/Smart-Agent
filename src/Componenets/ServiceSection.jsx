@@ -11,7 +11,7 @@ const ServicesSection = () => {
       className="min-h-screen bg-white rounded-t-[50px] md:rounded-t-[100px]"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       viewport={{ once: true, amount: 0 }}
     >
       <LogoShowcase />
