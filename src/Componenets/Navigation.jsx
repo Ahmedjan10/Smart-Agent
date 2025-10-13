@@ -43,7 +43,7 @@ const Navigation = ({ onNavigateToAuth }) => {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  className="relative text-black hover:text-white transition-colors duration-300 group"
+                  className="relative text-black hover:text-blue-500 transition-colors duration-300 group"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 + 0.5 }}

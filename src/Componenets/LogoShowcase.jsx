@@ -13,7 +13,7 @@ const LogoIcon = ({ icon }) => {
 };
 
 const LogoShowcase = () => (
-    <div className="relative bg-white py-10 w-full rounded-t-[60px] md:rounded-t-[80px]">
+    <div className="relative bg-white py-10 w-full rounded-t-[60px] md:rounded-t-[80px] -mt-[80px] md:-mt-[100px]">
         <div className="gradient-edge" />
         <div className="gradient-edge" />
 

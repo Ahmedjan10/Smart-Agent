@@ -308,7 +308,9 @@ const ServicesSection = () => {
           </div>
         </div>
       </div>
+      
     </motion.div>
+    
   );
 };
 

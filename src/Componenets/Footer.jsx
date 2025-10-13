@@ -36,7 +36,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer id="contact" className="relative pt-20 pb-8 overflow-hidden bg-black">
+    <footer id="contact" className="relative pt-20 pb-8 overflow-hidden bg-gray-300">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -81,7 +81,7 @@ const Footer = () => {
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
       >
-        <ArrowUp className="w-5 h-5 text-white" />
+        <ArrowUp className="w-5 h-5 text-black" />
       </motion.button>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,13 +100,13 @@ const Footer = () => {
                 className="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-700"
                 style={{
                   
-              
+                  boxShadow: '0 4px 15px rgba(255, 140, 0, 0.3)'
                 }}
               >
                 <div className="w-5 h-5 bg-white rounded-sm opacity-90"></div>
               </div>
               <span className="text-2xl font-bold">
-                <span className="bg-blue-100 bg-clip-text text-transparent"
+                <span className="bg-blue-900 bg-clip-text text-transparent"
                   style={{
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -116,7 +116,7 @@ const Footer = () => {
                 </span>
               </span>
             </div>
-            <p className="text-white/70 mb-6 leading-relaxed">
+            <p className="text-black/90 mb-6 leading-relaxed">
               Empowering businesses with next-generation AI agents. Transform your operations with our cutting-edge ChatBot, VoiceBot, and Multi-Agent systems.
             </p>
             
@@ -128,7 +128,7 @@ const Footer = () => {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-white/60 hover:text-blue-400 transition-colors hover:border-blue-400/30 hover:bg-orange-400/5"
+                    className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-black/80 hover:text-blue-400 transition-colors hover:border-blue-400/30 hover:bg-orange-400/5"
                     whileHover={{ y: -2, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -152,7 +152,7 @@ const Footer = () => {
               transition={{ duration: 0.8, delay: sectionIndex * 0.1 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-white font-semibold mb-4">{section.title}</h4>
+              <h4 className="text-black font-semibold mb-4">{section.title}</h4>
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
                   <motion.li
@@ -164,7 +164,7 @@ const Footer = () => {
                   >
                     <a 
                       href="#" 
-                      className="text-white/60 hover:text-blue-400 transition-colors hover:translate-x-1 inline-block transform transition-transform duration-200"
+                      className="text-black/70 hover:text-blue-400 transition-colors hover:translate-x-1 inline-block transform transition-transform duration-200"
                     >
                       {link}
                     </a>
@@ -187,7 +187,9 @@ const Footer = () => {
           <motion.div
             className="absolute inset-0 opacity-10"
             style={{
-              background: 'linear-gradient(135deg, #ff8c00, #ff6b00)',
+              background: "linear-gradient(135deg, #4b5563, #6b7280, #1e3a8a)"
+
+
             }}
             animate={{
               opacity: [0.05, 0.15, 0.05],
@@ -199,19 +201,19 @@ const Footer = () => {
             }}
           />
           
-          <div className="max-w-2xl mx-auto text-center relative z-10">
-            <h3 className="text-2xl font-bold text-white mb-4">Stay Updated</h3>
-            <p className="text-white/70 mb-6">
+          <div className="max-w-2xl mx-auto text-center relative z-10 ">
+            <h3 className="text-2xl font-bold text-black mb-4">Stay Updated</h3>
+            <p className="text-black/70 mb-6">
               Get the latest news about AI technology and product updates delivered to your inbox.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto bg">
+              <input 
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
+                className="flex-1 px-4 py-3 bg-white/10 border border-white/10 rounded-lg text-black placeholder-black/60 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
               />
               <Button 
-                className="px-8 text-white font-medium border-0 bg-blue-500"
+                className="px-8 text-black font-medium border-0 bg-blue-500"
                 
               >
                 Subscribe
@@ -228,17 +230,17 @@ const Footer = () => {
           transition={{ duration: 0.8, delay: 0.7 }}
           viewport={{ once: true }}
         >
-          <p className="text-white/60 mb-4 md:mb-0">
+          <p className="text-black mb-4 md:mb-0">
             © 2024 AI Agent Hub. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-6">
-            <a href="#" className="text-white/60 hover:text-blue-400 transition-colors">
+            <a href="#" className="text-black hover:text-blue-500 transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-white/60 hover:text-blue-400 transition-colors">
+            <a href="#" className="text-black hover:text-blue-500 transition-colors">
               Terms of Service
             </a>
-            <a href="#" className="text-white/60 hover:text-blue-400 transition-colors">
+            <a href="#" className="text-black hover:text-blue-500 transition-colors">
               Cookie Policy
             </a>
           </div>
