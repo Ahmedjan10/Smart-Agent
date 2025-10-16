@@ -4,16 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/Button';
 import { MessageCircle, Mic, Users, ArrowUp, Sparkles, Send, Play, Network, X } from 'lucide-react';
 import LogoShowcase from './LogoShowcase';
+import CardSwap  from './CardSwipSection';
 
 const ServicesSection = () => {
   return (
     <motion.div
-      className="min-h-screen bg-white rounded-t-[50px] md:rounded-t-[100px]"
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0 }}
-    >
+  initial={{ opacity: 0, y: 100 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.2, ease: "easeOut" }}
+  viewport={{ once: true, amount: 0, margin: "0px 0px 10px 0px" }}
+>
+
       <LogoShowcase />
 
       {/* First Content Section */}
@@ -53,6 +54,8 @@ const ServicesSection = () => {
           </div>
         </div>
       </div>
+
+        <CardSwap/>
 
       {/* Second Section - White Background with Border */}
       <div className="container mx-auto px-4 md:px-8 py-16">
@@ -308,9 +311,7 @@ const ServicesSection = () => {
           </div>
         </div>
       </div>
-      
     </motion.div>
-    
   );
 };
 

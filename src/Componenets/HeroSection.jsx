@@ -70,7 +70,11 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16 justify-center"
           >
             <Button
-              className="bg-white hover:bg-blue-600 text-black hover:text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold rounded-2xl shadow-lg group w-full sm:w-auto"
+              className="bg-white hover:bg-blue-600 text-black hover:text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg 
+              font-semibold rounded-2xl shadow-lg group w-full sm:w-auto"
+                 onClick={() => {
+                    onNavigateToAuth();
+                  }}
             >
               <span>Get Started Free</span>
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

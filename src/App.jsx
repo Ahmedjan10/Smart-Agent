@@ -1,79 +1,46 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Navigation from './Componenets/Navigation';
-import HeroSection from './Componenets/HeroSection';
-import ServicesSection from './Componenets/ServiceSection';
-import DashboardSection from './Componenets/DashboardSection';
-import Footer from './Componenets/Footer';
-import AuthPage from './Componenets/Authpage';
-import CardSwap  from './Componenets/CardSwipSection';
-
-
-
-
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Navigation from "./Componenets/Navigation";
+import HeroSection from "./Componenets/HeroSection";
+import ServicesSection from "./Componenets/ServiceSection";
+import DashboardSection from "./Componenets/DashboardSection";
+import Footer from "./Componenets/Footer";
+import AuthPage from "./Componenets/Authpage";
+import OurChatbot from "./Componenets/OurChatbot";
+import ClientReviews from "./Componenets/ClientReviews";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // ✅ removed type
-
-  useEffect(() => {
-
-    // Smooth scrolling for anchor links
-    const handleAnchorClick = (e) => {   // ✅ removed Event typing
-      const target = e.target;
-      if (target.href && target.href.includes('#')) {
-        e.preventDefault();
-        const id = target.href.split('#')[1];
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    };
-
-    document.addEventListener('click', handleAnchorClick);
-
-    return () => {
-      document.removeEventListener('click', handleAnchorClick);
-    };
-  }, []);
-
-  const navigateToAuth = () => setCurrentPage('auth');
-  const navigateToHome = () => setCurrentPage('home');
-
-  // Render different pages based on current route
-  if (currentPage === 'auth') {
-    return <AuthPage onBack={navigateToHome} />;
-  }
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navigation appears on all pages */}
+      <Navigation
+        onNavigateToAuth={() => navigate("/auth")}
+        onNavigateToChatbot={() => navigate("/chatbot")}
+      />
 
-      {/* Navigation */}
-      <Navigation onNavigateToAuth={navigateToAuth} />
-
-
-      {/* Main Content */}
+      {/* Page Routes */}
       <main className="relative">
-        <HeroSection onNavigateToAuth={navigateToAuth} />
-
-  <ServicesSection />
-<CardSwap/>
-
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <HeroSection onNavigateToAuth={() => navigate("/auth")} />
+                <ServicesSection />
+                <ClientReviews />
+              </>
+            }
+          />
+          <Route path="/auth" element={<AuthPage onBack={() => navigate("/")} />} />
+          <Route path="/chatbot" element={<OurChatbot />} />
+        </Routes>
       </main>
-
-
 
       {/* Footer */}
       <Footer />
-
-
-
-      {/* Global Background Effects */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {/* Ambient Glow */}
-
-      </div>
     </div>
   );
 }
